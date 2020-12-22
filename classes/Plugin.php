@@ -3,7 +3,7 @@
  * Main plugin file.
  */
 
-namespace Required\WP_Huh;
+namespace Neverything\WP_Huh;
 
 /**
  * Main plugin class.
@@ -71,13 +71,15 @@ class Plugin {
 		/**
 		 * Only show on front-end when using in the customizer preview.
 		 */
-		add_action( 'customize_preview_init', [ $this, 'frontend_hooks' ] );
+		add_action( 'customize_preview_init', [ $this, 'customize_hooks' ] );
+
+		add_action( 'init', [ $this, 'frontend_hooks' ] );
 	}
 
 	/**
 	 * Hooks to enqueue docs on the front-end, for example in the customizer.
 	 */
-	public function frontend_hooks() {
+	public function customize_hooks() {
 		if ( array_key_exists( 'all', $this->doc_urls )
 		     || array_key_exists( 'customize.php', $this->doc_urls )
 		) {
@@ -87,10 +89,26 @@ class Plugin {
 		}
 	}
 
+	public function frontend_hooks() {
+		if ( is_user_logged_in() ) {
+			add_action( 'wp_enqueue_scripts', [ $this, 'frontend_load_scripts' ] );
+			add_action( 'wp_enqueue_scripts', [ $this, 'data_urls' ] );
+			add_action( 'wp_footer', [ $this, 'display' ] );
+		}
+	}
+
 	/**
 	 * Only enqueue in the customizer preview, not the customizer itself.
 	 */
 	public function customizer_preview_load_scripts() {
+		wp_enqueue_style( 'huh_style' );
+		wp_enqueue_script( 'huh_script' );
+	}
+
+	/**
+	 * Only enqueue in the customizer preview, not the customizer itself.
+	 */
+	public function frontend_load_scripts() {
 		wp_enqueue_style( 'huh_style' );
 		wp_enqueue_script( 'huh_script' );
 	}
@@ -192,7 +210,8 @@ class Plugin {
 			 */
 			$pagenow = 'customize.php';
 		} else {
-			return; // Bailout if this method gets called somewhere else.
+			global $wp;
+			return $wp->request;
 		}
 
 		/**

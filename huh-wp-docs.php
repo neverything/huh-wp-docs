@@ -2,24 +2,24 @@
 /**
  * @wordpress-plugin
  * Plugin Name: Huh! WP Docs
- * Plugin URI:  https://required.com
+ * Plugin URI:  https://silvanhagen.com
  * Description: Show help docs easily in the WordPress admin and the theme customizer.
  * Version:     1.0.0
- * Author:      required
- * Author URI:  https://required.com
+ * Author:      neverything
+ * Author URI:  https://silvanhagen.com
  * Text Domain: huh-wp-docs
  * License:     GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
- * GitHub Plugin URI: wearerequired/huh-wp-docs
+ * GitHub Plugin URI: neverything/huh-wp-docs
  *
  *
  * Note: This plugin is based on the awesome <https://secretpizza.party/huh-making-documentation-easier/> and a fork of
  * it (<https://github.com/Daronspence/huh>) that allows to use multiple markdown files. Thanks for that!
  *
- * @package Required\WP_Huh
+ * @package Neverything\WP_Huh
  */
 
-namespace Required\WP_Huh;
+namespace Neverything\WP_Huh;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -42,7 +42,7 @@ function init() {
 	/**
 	 * Default docs url.
 	 */
-	$doc_urls = 'https://raw.githubusercontent.com/neverything/huh-wp-docs/master/README.md';
+	$doc_urls['all'] = 'https://raw.githubusercontent.com/neverything/huh-wp-docs/master/README.md';
 
 	$plugin = new Plugin();
 	$plugin->init( $doc_urls );
