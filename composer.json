@@ -1,14 +1,14 @@
 {
-  "name": "wearerequired/huh-wp-docs",
+  "name": "neverything/huh-wp-docs",
   "description": "Show help docs easily in the WordPress admin.",
   "version": "1.0.0",
   "type": "wordpress-plugin",
   "license": "GPL-2.0+",
   "authors": [
     {
-      "name": "required",
-      "email": "support@required.ch",
-      "homepage": "https://required.com",
+      "name": "Silvan Hagen",
+      "email": "silvan@silvanhagen.com",
+      "homepage": "https://silvanhagen.com",
       "role": "Developer"
     }
   ],
@@ -23,7 +23,7 @@
     }
   ],
   "require": {
-    "php": ">=5.4"
+    "php": ">=7.1"
   },
   "autoload": {
     "psr-4": {
